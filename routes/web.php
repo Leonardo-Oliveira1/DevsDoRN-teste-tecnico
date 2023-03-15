@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\AnnuitiesController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AssociatesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +15,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
+
+Route::get('/registrarAssociado', [AssociatesController::class, 'index'])->name('register_associate');
+Route::post('/registrarAssociado', [AssociatesController::class, 'store'])->name('saveAssociate');
+
+Route::get('/registrarAnuidade', [AnnuitiesController::class, 'index'])->name('register_annuity');
+Route::post('/registrarAnuidade', [AnnuitiesController::class, 'store'])->name('saveAnnuity');
