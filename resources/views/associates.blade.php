@@ -10,10 +10,12 @@
 </head>
 
 <body>
-    <a onclick="window.history.back()" style="cursor: pointer;">
+    <a href="/" style="cursor: pointer;">
         < Voltar</a>
             <h1>Associados</h1>
             <a href="{{ route('registerAssociate') }}">Cadastrar associados</a>
+
+            @include('utils.flash-message')
 
             <table id="table" class="display" style="width:100%">
                 <thead>
@@ -25,12 +27,14 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach($associates as $associate)
                     <tr>
-                        <td>Leonardo Oliveira</td>
-                        <td>oleonardo78@gmail.com</td>
-                        <td>711.695.544-58</td>
-                        <td>20/03/2021</td>
+                        <td>{{ $associate->name }}</td>
+                        <td>{{ $associate->email }}</td>
+                        <td>{{ $associate->cpf }}</td>
+                        <td>{{ $associate->membership_date }}</td>
                     </tr>
+                    @endforeach
                 </tbody>
             </table>
 </body>

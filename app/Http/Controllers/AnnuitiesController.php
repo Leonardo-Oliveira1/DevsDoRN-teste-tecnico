@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class AnnuitiesController extends Controller
 {
     public function index(){
-        return view('annuities');
+        return view('annuities', ['annuities' => $this->getAllAnnuityData()]);
 
     }
 
@@ -24,6 +24,13 @@ class AnnuitiesController extends Controller
         return $final;
     }
 
+    public function getAllAnnuityData()
+    {
+        $data = Annuity::orderBy('year', 'ASC')->get();
+
+        return $data;
+    }
+
     public function store(Request $request)
     {
         $annuity = new Annuity;
@@ -34,8 +41,13 @@ class AnnuitiesController extends Controller
         $annuity->year = $year;
         $annuity->price = $price;
 
-        $annuity->save();
+        if (Annuity::where('year', $year)->get()->isEmpty()) {
+            $annuity->save();
+        }else{
+            return redirect()->route('annuities')
+            ->with('error','Este ano já tem uma anuidade cadastrada.');
+        }
 
-        return redirect('/');
+        return redirect()->route('annuities');
     }
 }

@@ -9,7 +9,7 @@ use App\Models\Associate;
 class AssociatesController extends Controller
 {
     public function index(){
-        return view('associates');
+        return view('associates', ['associates' => $this->getAllAssociateData()]);
 
     }
 
@@ -19,11 +19,11 @@ class AssociatesController extends Controller
     }
 
 
-    public function totalStock($name)
+    public function getAllAssociateData()
     {
-        //$total = ItemStock::select()->whereRaw("name = '$name'")->sum("quantity");
+        $data = Associate::orderBy('name', 'ASC')->get();
 
-        //return $total;
+        return $data;
     }
 
     public function store(Request $request)
@@ -40,8 +40,14 @@ class AssociatesController extends Controller
         $associate->cpf = $cpf;
         $associate->membership_date = $date;
 
-        $associate->save();
 
-        return redirect('/');
+        if (Associate::where('cpf', $cpf)->get()->isEmpty()) {
+            $associate->save();
+        }else{
+            return redirect()->route('associates')
+            ->with('error','Este associado já está cadastrado no sistema.');
+        }
+
+        return redirect('associates');
     }
 }

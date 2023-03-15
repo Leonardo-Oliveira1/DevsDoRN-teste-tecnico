@@ -10,11 +10,12 @@
 </head>
 
 <body>
-    <a onclick="window.history.back()" style="cursor: pointer;">
+    <a href="/" style="cursor: pointer;">
         < Voltar</a>
             <h1>Anuidades</h1>
             <a href="{{ route('registerAnnuity') }}">Cadastrar anuidade</a>
 
+            @include('utils.flash-message')
 
             <table id="table" class="display" style="width:100%">
                 <thead>
@@ -24,18 +25,12 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach($annuities as $annuity)
                     <tr>
-                        <td>Tiger Nixon</td>
-                        <td>System Architect</td>
+                        <td>{{ $annuity->year }}</td>
+                        <td>R$ {{ $annuity->price }}</td>
                     </tr>
-                    <tr>
-                        <td>Garrett Winters</td>
-                        <td>Accountant</td>
-                    </tr>
-                    <tr>
-                        <td>Ashton Cox</td>
-                        <td>Junior Technical Author</td>
-                    </tr>
+                    @endforeach
                 </tbody>
             </table>
 </body>
