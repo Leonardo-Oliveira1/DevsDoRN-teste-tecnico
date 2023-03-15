@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 class AnnuitiesController extends Controller
 {
     public function index(){
+        return view('annuities');
+
+    }
+
+    public function registerIndex(){
         return view('registerAnnuity');
 
     }

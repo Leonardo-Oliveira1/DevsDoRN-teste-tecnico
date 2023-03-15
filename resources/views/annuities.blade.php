@@ -13,7 +13,7 @@
     <a onclick="window.history.back()" style="cursor: pointer;">
         < Voltar</a>
             <h1>Anuidades</h1>
-            <a href="{{ route('annuities') }}">Cadastrar anuidade</a>
+            <a href="{{ route('registerAnnuity') }}">Cadastrar anuidade</a>
 
 
             <table id="table" class="display" style="width:100%">

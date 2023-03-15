@@ -20,16 +20,11 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::get('/anuidades', function () {
-    return view('annuities');
-})->name('annuities');
 
-Route::get('/associados', function () {
-    return view('associates');
-})->name('associates');
+Route::get('/associados', [AssociatesController::class, 'index'])->name('associates');
+Route::get('/registrarAssociado', [AssociatesController::class, 'registerIndex'])->name('registerAssociate');
+Route::post('/salvarAssociado', [AssociatesController::class, 'store'])->name('saveAssociate');
 
-Route::get('/registrarAssociado', [AssociatesController::class, 'index'])->name('register_associate');
-Route::post('/registrarAssociado', [AssociatesController::class, 'store'])->name('saveAssociate');
-
-Route::get('/registrarAnuidade', [AnnuitiesController::class, 'index'])->name('register_annuity');
-Route::post('/registrarAnuidade', [AnnuitiesController::class, 'store'])->name('saveAnnuity');
+Route::get('/anuidades', [AnnuitiesController::class, 'index'])->name('annuities');
+Route::get('/registrarAnuidade', [AnnuitiesController::class, 'registerIndex'])->name('registerAnnuity');
+Route::post('/salvarAnuidade', [AnnuitiesController::class, 'store'])->name('saveAnnuity');

@@ -9,12 +9,22 @@ use App\Models\Associate;
 class AssociatesController extends Controller
 {
     public function index(){
+        return view('associates');
+
+    }
+
+    public function registerIndex(){
         return view('registerAssociate');
 
     }
 
 
+    public function totalStock($name)
+    {
+        //$total = ItemStock::select()->whereRaw("name = '$name'")->sum("quantity");
 
+        //return $total;
+    }
 
     public function store(Request $request)
     {
