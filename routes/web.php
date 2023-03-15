@@ -20,6 +20,14 @@ Route::get('/', function () {
     return view('home');
 });
 
+Route::get('/anuidades', function () {
+    return view('annuities');
+})->name('annuities');
+
+Route::get('/associados', function () {
+    return view('associates');
+})->name('associates');
+
 Route::get('/registrarAssociado', [AssociatesController::class, 'index'])->name('register_associate');
 Route::post('/registrarAssociado', [AssociatesController::class, 'store'])->name('saveAssociate');
 

@@ -10,8 +10,7 @@
 </head>
 
 <body>
-    <a onclick="window.history.back()" class="btn btn-label-secondary" style="cursor: pointer;">
-        < Voltar</a>
+    <a onclick="window.history.back()" style="cursor: pointer;"> < Voltar</a>
             <h1>Cadastrar anuidade</h1>
             <form method="POST" action="{{ route('saveAnnuity') }}" enctype='multipart/form-data'>
                 @csrf
