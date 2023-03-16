@@ -28,3 +28,7 @@ Route::post('/salvarAssociado', [AssociatesController::class, 'store'])->name('s
 Route::get('/anuidades', [AnnuitiesController::class, 'index'])->name('annuities');
 Route::get('/registrarAnuidade', [AnnuitiesController::class, 'registerIndex'])->name('registerAnnuity');
 Route::post('/salvarAnuidade', [AnnuitiesController::class, 'store'])->name('saveAnnuity');
+
+Route::get('/alterarValorAnuidade/{id}', [AnnuitiesController::class, 'editIndex'])->name('editAnnuity');
+Route::post('/salvarValorAnuidade/{id}', [AnnuitiesController::class, 'edit'])->name('saveEditAnnuity');
+

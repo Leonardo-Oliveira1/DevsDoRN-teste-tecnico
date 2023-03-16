@@ -22,6 +22,7 @@
                     <tr>
                         <th>Ano</th>
                         <th>Valor</th>
+                        <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -29,6 +30,7 @@
                     <tr>
                         <td>{{ $annuity->year }}</td>
                         <td>R$ {{ $annuity->price }}</td>
+                        <td><a href="/alterarValorAnuidade/{{ $annuity->id }}">Alterar valor</a></td>
                     </tr>
                     @endforeach
                 </tbody>
