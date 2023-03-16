@@ -1,15 +1,10 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+@extends('layouts.core')
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
-    <script src="{{ asset('jquery.maskMoney.js') }}" type="text/javascript"></script>
-    <title>Laravel</title>
-</head>
+@section('head')
+<script src="{{ asset('jquery.maskMoney.js') }}" type="text/javascript"></script>
+@endsection
 
-<body>
+@section('content')
     <a onclick="window.history.back()" style="cursor: pointer;"> < Voltar</a>
             <h1>Cadastrar anuidade</h1>
             <form method="POST" action="{{ route('saveAnnuity') }}" enctype='multipart/form-data'>
@@ -22,12 +17,12 @@
 
                 <input type="submit" value="Cadastrar anuidade"></input>
             </form>
-</body>
+            @endsection
 
+@section('outBody')
 <script>
     $(function() {
         $('#price').maskMoney();
     })
 </script>
-
-</html>
+@endsection

@@ -1,37 +1,33 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+@extends('layouts.core')
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
-    <script src="{{ asset('jquery.maskMoney.js') }}" type="text/javascript"></script>
-    <title>Laravel</title>
-</head>
+@section('head')
+<script src="{{ asset('jquery.maskMoney.js') }}" type="text/javascript"></script>
+@endsection
 
-<body>
-    <a onclick="window.history.back()" style="cursor: pointer;"> < Voltar</a>
-            <h1>Alterar anuidade de {{ $annuity->year }}</h1>
+@section('content')
+<a onclick="window.history.back()" style="cursor: pointer;">
+    < Voltar</a>
+        <h1>Alterar anuidade de {{ $annuity->year }}</h1>
 
-            @include('utils.flash-message')
+        @include('utils.flash-message')
 
 
-            <form method="POST" action="{{ route('saveEditAnnuity', $annuity->id) }}" enctype='multipart/form-data'>
-                @csrf
-                <label>Ano</label><br>
-                <input type="number" value="{{ $annuity->year }}" disabled /> <br>
+        <form method="POST" action="{{ route('saveEditAnnuity', $annuity->id) }}" enctype='multipart/form-data'>
+            @csrf
+            <label>Ano</label><br>
+            <input type="number" value="{{ $annuity->year }}" disabled /> <br>
 
-                <label>Valor</label><br>
-                <input type="text" id="price" name="price" data-thousands="," data-decimal="." value="R$ {{ $annuity->price }}" data-prefix="R$ " />
+            <label>Valor</label><br>
+            <input type="text" id="price" name="price" data-thousands="," data-decimal="." value="R$ {{ $annuity->price }}" data-prefix="R$ " />
 
-                <input type="submit" value="Alterar anuidade"></input>
-            </form>
-</body>
+            <input type="submit" value="Alterar anuidade"></input>
+        </form>
+@endsection
 
-<script>
-    $(function() {
-        $('#price').maskMoney();
-    })
-</script>
-
-</html>
+@section('outBody')
+    <script>
+        $(document).ready(function() {
+            $('#table').DataTable();
+        });
+    </script>
+@endsection
