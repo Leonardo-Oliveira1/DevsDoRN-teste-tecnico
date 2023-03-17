@@ -63,11 +63,9 @@ class AssociatesController extends Controller
         $associate->cpf = $cpf;
         $associate->membership_date = $date;
 
-
-
         if (Associate::where('cpf', $cpf)->get()->isEmpty()) {
             $associate->save();
-            $payments->storePayment($associate->id, $this->getAssociateAnnuitiesYear($associate->id), $this->getAssociateAnnuitiesPrice($associate->id));
+            $payments->storePayment($associate->id, $this->getAssociateAnnuitiesData($associate->id, "year"), $this->getAssociateAnnuitiesData($associate->id, "price"));
         } else {
             return redirect()->route('associates')
                 ->with('error', 'Este associado já está cadastrado no sistema.');
@@ -77,34 +75,18 @@ class AssociatesController extends Controller
     }
 
 
-    public function getAssociateAnnuitiesYear($id)
+    public function getAssociateAnnuitiesData($id, $type)
     {
         $data = Associate::where('id', "=", $id)->first();
         $membership_date = date('Y', strtotime($data->membership_date));
         $associate_annuities = Annuity::orderBy('year', 'ASC')->select()->whereRaw("year >= '$membership_date' and year <= CURDATE()")->get();
 
-        $year = array();
+        $array = array();
 
         foreach ($associate_annuities as $annuity) {
-            array_push($year, $annuity->year);
+            array_push($array, $annuity->$type);
         }
 
-        return $year;
+        return $array;
     }
-
-    public function getAssociateAnnuitiesPrice($id)
-    {
-        $data = Associate::where('id', "=", $id)->first();
-        $membership_date = date('Y', strtotime($data->membership_date));
-        $associate_annuities = Annuity::orderBy('year', 'ASC')->select()->whereRaw("year >= '$membership_date' and year <= CURDATE()")->get();
-
-        $price = array();
-
-        foreach ($associate_annuities as $annuity) {
-            array_push($price, $annuity->price);
-        }
-
-        return $price;
-    }
-
 }
