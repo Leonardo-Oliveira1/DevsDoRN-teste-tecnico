@@ -8,6 +8,7 @@
 <a href="/" style="cursor: pointer;">
     < Voltar</a>
         <h1>Associados</h1>
+        <p>*clique no nome para saber mais</p>
         <a href="{{ route('registerAssociate') }}">Cadastrar associados</a>
 
         @include('utils.flash-message')
@@ -24,7 +25,7 @@
             <tbody>
                 @foreach($associates as $associate)
                 <tr>
-                    <td>{{ $associate->name }}</td>
+                    <td><a href="{{ route('associate', $associate->id) }}">{{ $associate->name }}</a></td>
                     <td>{{ $associate->email }}</td>
                     <td>{{ $associate->cpf }}</td>
                     <td>{{ $associate->membership_date }}</td>

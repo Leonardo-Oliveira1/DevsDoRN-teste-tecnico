@@ -3,6 +3,7 @@
 use App\Http\Controllers\AnnuitiesController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AssociatesController;
+use App\Http\Controllers\CheckoutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +23,7 @@ Route::get('/', function () {
 
 
 Route::get('/associados', [AssociatesController::class, 'index'])->name('associates');
+Route::get('/associate/{id}', [AssociatesController::class, 'AssociateIndex'])->name('associate');
 Route::get('/registrarAssociado', [AssociatesController::class, 'registerIndex'])->name('registerAssociate');
 Route::post('/salvarAssociado', [AssociatesController::class, 'store'])->name('saveAssociate');
 
@@ -31,4 +33,5 @@ Route::post('/salvarAnuidade', [AnnuitiesController::class, 'store'])->name('sav
 
 Route::get('/alterarValorAnuidade/{id}', [AnnuitiesController::class, 'editIndex'])->name('editAnnuity');
 Route::post('/salvarValorAnuidade/{id}', [AnnuitiesController::class, 'edit'])->name('saveEditAnnuity');
+
 
