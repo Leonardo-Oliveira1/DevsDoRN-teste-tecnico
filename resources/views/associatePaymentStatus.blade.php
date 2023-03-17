@@ -8,7 +8,7 @@
 <a onclick="window.history.back()" style="cursor: pointer;">
     < Voltar</a>
         <h1>{{ $associate->name}} ({{ $associate->cpf }})</h1>
-        <h2>Valor total devido: R$ {{ $total_price}},00</h2>
+        <h2>Valor total devido: R$ {{ $total_price}}</h2>
         <table id="table" class="display" style="width:100%">
             <thead>
                 <tr>
@@ -18,13 +18,18 @@
                 </tr>
             </thead>
             <tbody>
-                @for ($i = 0; $i < count($prices); $i++)
+                @foreach($payments as $payment)
                 <tr>
-                    <td>{{ $year[$i] }}</td>
-                    <td>{{ $prices[$i] }}</td>
-                    <td>Não pago</td>
+                    <td>{{ $payment->year }}</td>
+                    <td>{{ $payment->price }}</td>
+                    @if($payment->paid == 0)
+                        <td>Não pago</td>
+                        @else
+                        <td>Pago</td>
+                    @endif
+
                 </tr>
-                @endfor
+                @endforeach
             </tbody>
         </table>
         @endsection

@@ -27,9 +27,10 @@ class AssociatesController extends Controller
 
         return view('associatePaymentStatus', [
             'associate' => $this->getAssociateData($id),
-            'year' => $this->getAssociateAnnuitiesYear($id),
-            'prices' => $this->getAssociateAnnuitiesPrice($id),
-            'total_price' => "a",
+            'payments' => $payments->getAssociatePaymentInfo($id),
+            'year' => $this->getAssociateAnnuitiesData($id, "year"),
+            'prices' => $this->getAssociateAnnuitiesData($id, "price"),
+            'total_price' => $payments->getTotalDebt($id),
         ]);
     }
 
