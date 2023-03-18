@@ -13,7 +13,11 @@ class AssociatesController extends Controller
 {
     public function index()
     {
-        return view('associates', ['associates' => $this->getAssociatesData()]);
+        $payments = new PaymentController;
+
+        return view('associates', [
+            'associates' => array_map(null, json_decode($this->getAssociatesData(), false), $this->getAssociateTotalDebts())
+        ]);
     }
 
     public function registerIndex()
@@ -24,12 +28,9 @@ class AssociatesController extends Controller
     public function AssociateIndex($id)
     {
         $payments = new PaymentController;
-
         return view('associatePaymentStatus', [
             'associate' => $this->getAssociateData($id),
             'payments' => $payments->getAssociatePaymentInfo($id),
-            'year' => $this->getAssociateAnnuitiesData($id, "year"),
-            'prices' => $this->getAssociateAnnuitiesData($id, "price"),
             'total_price' => $payments->getTotalDebt($id),
         ]);
     }
@@ -86,6 +87,20 @@ class AssociatesController extends Controller
 
         foreach ($associate_annuities as $annuity) {
             array_push($array, $annuity->$type);
+        }
+
+        return $array;
+    }
+
+    public function getAssociateTotalDebts()
+    {
+        $payments = new PaymentController;
+
+
+        $array = array();
+
+        for ($i=0; $i < count($this->getAssociatesData()); $i++) {
+            array_push($array, $payments->getTotalDebt($this->getAssociatesData()[$i]->id));
         }
 
         return $array;

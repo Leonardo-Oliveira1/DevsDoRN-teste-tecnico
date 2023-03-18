@@ -3,7 +3,6 @@
 use App\Http\Controllers\AnnuitiesController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AssociatesController;
-use App\Http\Controllers\CheckoutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,5 +32,3 @@ Route::post('/salvarAnuidade', [AnnuitiesController::class, 'store'])->name('sav
 
 Route::get('/alterarValorAnuidade/{id}', [AnnuitiesController::class, 'editIndex'])->name('editAnnuity');
 Route::post('/salvarValorAnuidade/{id}', [AnnuitiesController::class, 'edit'])->name('saveEditAnnuity');
-
-
