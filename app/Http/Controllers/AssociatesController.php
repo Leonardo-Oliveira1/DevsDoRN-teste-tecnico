@@ -69,7 +69,7 @@ class AssociatesController extends Controller
             $associate->save();
             $payments->storePayment($associate->id, $this->getAssociateAnnuitiesData($associate->id, "year"), $this->getAssociateAnnuitiesData($associate->id, "price"));
         } else {
-            return redirect()->route('associates')
+            return redirect()->route('registerAssociate')
                 ->with('error', 'Este associado já está cadastrado no sistema.');
         }
 

@@ -5,24 +5,61 @@
 @endsection
 
 @section('content')
-    <a onclick="window.history.back()" style="cursor: pointer;"> < Voltar</a>
+
+<style>
+    html,
+    body {
+        height: 100%
+    }
+
+    body {
+        background-color: #f6f7f9;
+        color: #23272f;
+    }
+
+    #page_apresentation {
+        position: relative;
+        top: 40px;
+    }
+
+    #page_action:hover {
+        color: blue;
+        transition: all 0.2s ease-in-out 0s;
+    }
+</style>
+
+@include("utils.return")
+
+<a onclick="window.history.back()" style="cursor: pointer;" id="return" class="mx-3 fs-2">
+    < Voltar</a>
+
+        <div class="d-flex align-items-center justify-content-center flex-column" id="page_apresentation">
             <h1>Cadastrar anuidade</h1>
-            <form method="POST" action="{{ route('saveAnnuity') }}" enctype='multipart/form-data'>
+        </div>
+
+        <div class="h-100 d-flex align-items-center justify-content-center flex-column">
+            <form method="POST" action="{{ route('saveAnnuity') }}" enctype='multipart/form-data' style="background-color: #f6f7f9; padding: 30px; border: 1px solid #4444; border-radius: 15px; filter: drop-shadow(0px 0px 13px #4444)">
                 @csrf
-                <label>Ano</label><br>
-                <input type="number" name="year" min="1900" max="{{ date('Y') }}" step="1" value="2023" required /> <br>
+                <div class="form-group" style="width: 300px;">
 
-                <label>Valor</label><br>
-                <input type="text" id="price" name="price" data-thousands="." data-decimal="," data-prefix="R$ " />
+                    @include('utils.flash-message')
 
-                <input type="submit" value="Cadastrar anuidade"></input>
+                    <label>Ano</label><br>
+                    <input type="number" class="form-control" name="year" min="1900" max="{{ date('Y') }}" step="1" value="2023" required /> <br>
+
+                    <label>Valor</label><br>
+                    <input type="text" class="form-control" id="price" name="price" data-thousands="." data-decimal="," data-prefix="R$ " /><br>
+
+                    <input type="submit" class="btn btn-primary" value="Cadastrar anuidade" style="width: 100%;">
+                </div>
             </form>
-            @endsection
+        </div>
+        @endsection
 
-@section('outBody')
-<script>
-    $(function() {
-        $('#price').maskMoney();
-    })
-</script>
-@endsection
+        @section('outBody')
+        <script>
+            $(function() {
+                $('#price').maskMoney();
+            })
+        </script>
+        @endsection

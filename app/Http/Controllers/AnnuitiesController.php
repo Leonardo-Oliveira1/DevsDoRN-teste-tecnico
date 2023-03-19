@@ -57,7 +57,7 @@ class AnnuitiesController extends Controller
         if (Annuity::where('year', $year)->get()->isEmpty()) {
             $annuity->save();
         } else {
-            return redirect()->route('annuities')
+            return redirect()->route('registerAnnuity')
                 ->with('error', 'Este ano já tem uma anuidade cadastrada.');
         }
 
