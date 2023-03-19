@@ -4,17 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Annuity;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AnnuitiesController;
 use App\Http\Controllers\PaymentController;
 use App\Models\Associate;
-use App\Models\Payment;
 
 class AssociatesController extends Controller
 {
     public function index()
     {
-        $payments = new PaymentController;
-
         return view('associates', [
             'associates' => array_map(null, json_decode($this->getAssociatesData(), false), $this->getAssociateTotalDebts())
         ]);
@@ -58,19 +54,28 @@ class AssociatesController extends Controller
         $name = $request->input('name');
         $email = $request->input('email');
         $cpf = $request->input('cpf');
-        $date = $request->input('date');
+        $membership_date = $request->input('date');
 
         $associate->name = $name;
         $associate->email = $email;
         $associate->cpf = $cpf;
-        $associate->membership_date = $date;
+        $associate->membership_date = $membership_date;
 
-        if (Associate::where('cpf', $cpf)->get()->isEmpty()) {
-            $associate->save();
-            $payments->storePayment($associate->id, $this->getAssociateAnnuitiesData($associate->id, "year"), $this->getAssociateAnnuitiesData($associate->id, "price"));
+        $annuity_year_exists_in_database = !Annuity::where('year', date("Y", strtotime($membership_date)))->get()->isEmpty();
+
+        if ($annuity_year_exists_in_database == true) {
+
+            $is_user_not_already_registered = Associate::where('cpf', $cpf)->get()->isEmpty();
+            if ($is_user_not_already_registered) {
+                $associate->save();
+                $payments->storePayment($associate->id, $this->getAssociateAnnuitiesData($associate->id, "year"), $this->getAssociateAnnuitiesData($associate->id, "price"));
+            } else {
+                return redirect()->route('registerAssociate')
+                    ->with('error', 'Este associado já está cadastrado no sistema.');
+            }
         } else {
             return redirect()->route('registerAssociate')
-                ->with('error', 'Este associado já está cadastrado no sistema.');
+                ->with('error', 'Você precisa criar as anuidades de ' . date("Y", strtotime($membership_date)) . ' até o ano atual para registrar este associado.');
         }
 
         return redirect()->route('associates');
@@ -96,10 +101,9 @@ class AssociatesController extends Controller
     {
         $payments = new PaymentController;
 
-
         $array = array();
 
-        for ($i=0; $i < count($this->getAssociatesData()); $i++) {
+        for ($i = 0; $i < count($this->getAssociatesData()); $i++) {
             array_push($array, $payments->getTotalDebt($this->getAssociatesData()[$i]->id));
         }
 

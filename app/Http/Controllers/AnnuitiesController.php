@@ -54,7 +54,9 @@ class AnnuitiesController extends Controller
         $annuity->year = $year;
         $annuity->price = $price;
 
-        if (Annuity::where('year', $year)->get()->isEmpty()) {
+        $is_annuity_not_already_registered = Annuity::where('year', $year)->get()->isEmpty();
+
+        if ($is_annuity_not_already_registered) {
             $annuity->save();
         } else {
             return redirect()->route('registerAnnuity')
