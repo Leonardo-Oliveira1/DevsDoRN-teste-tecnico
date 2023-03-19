@@ -50,7 +50,7 @@
                     <input type="text" class="form-control" name="name" placeholder="" required><br>
 
                     <label>Email</label><br>
-                    <input type="text" class="form-control" name="email" required><br>
+                    <input type="email" class="form-control" name="email" required><br>
 
                     <label>CPF</label><br>
                     <input type="text" class="form-control" name="cpf" id="cpf" required><br>
