@@ -28,6 +28,15 @@
     }
 </style>
 
+
+<script>
+    function confirmPayment(id, year) {
+        if (confirm(`Ao clicar em OK, você estará confirmando o pagamento da anuidade de ${year} deste cliente.`)) {
+            window.location.replace(`/registrarPagamento/${id}/${year}`);
+        }
+    }
+</script>
+
 @include("utils.return")
 
 <a onclick="window.history.back()" style="cursor: pointer;" id="return" class="mx-3 fs-2">
@@ -49,6 +58,7 @@
                         <th>Ano</th>
                         <th>Valor da anuidade</th>
                         <th>Status</th>
+                        <th>Alterar status</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -58,10 +68,14 @@
                         <td>R$ {{ $payment->price }}</td>
                         @if($payment->paid == 0)
                         <td style="color: red;">Não pago</td>
+                        <form method="POST" action="/registrarPagamento/{{ $associate->id }}/{{ $payment->year }}" enctype='multipart/form-data'>
+                            @csrf
+                            <td onclick="confirmPayment('{{ $associate->id}}','{{ $payment->year }}')"><button>Confirmar pagamento</button></td>
+                        </form>
                         @else
                         <td style="color: blue;">Pago</td>
+                        <td></td>
                         @endif
-
                     </tr>
                     @endforeach
                 </tbody>

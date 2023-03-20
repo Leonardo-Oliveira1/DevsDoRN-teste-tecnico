@@ -3,6 +3,7 @@
 use App\Http\Controllers\AnnuitiesController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AssociatesController;
+use App\Http\Controllers\PaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,7 @@ Route::get('/associados', [AssociatesController::class, 'index'])->name('associa
 Route::get('/associate/{id}', [AssociatesController::class, 'AssociateIndex'])->name('associate');
 Route::get('/registrarAssociado', [AssociatesController::class, 'registerIndex'])->name('registerAssociate');
 Route::post('/salvarAssociado', [AssociatesController::class, 'store'])->name('saveAssociate');
+Route::post('/registrarPagamento/{id}/{year}', [PaymentController::class, 'setPaymentTrue'])->name('setPaymentTrue');
 
 Route::get('/anuidades', [AnnuitiesController::class, 'index'])->name('annuities');
 Route::get('/registrarAnuidade', [AnnuitiesController::class, 'registerIndex'])->name('registerAnnuity');

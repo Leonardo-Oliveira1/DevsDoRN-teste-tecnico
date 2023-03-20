@@ -57,11 +57,10 @@
             </form>
         </div>
         @endsection
-
         @section('outBody')
         <script>
-            $(document).ready(function() {
-                $('#table').DataTable();
-            });
+            $(function() {
+                $('#price').maskMoney();
+            })
         </script>
         @endsection

@@ -26,4 +26,10 @@ class PaymentController extends Controller
 
         return $total;
     }
+
+    public function setPaymentTrue($id, $year){
+        Payment::where('associate_id', $id)->where('year', $year)->update(['paid' => 1]);
+
+        return redirect('associate/'.$id);
+    }
 }
