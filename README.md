@@ -14,9 +14,9 @@
 ## Instalações
 
 ### 👨‍💻 Rodando a aplicação no ambiente de desenvolvimento
-Antes de começar, você vai precisar ter instalado em sua máquina a **versão 8.0.26 do PHP** para rodar este projeto.
+Antes de começar, é necessário ter instalado em sua máquina a **versão 8.0.26 do PHP** para rodar este projeto.
 
-Aqui não há nada fora do comum. Basicamente, você deve clonar o repositório e fazer os procedimentos padrões do Laravel para rodar a aplicação, como instalar as depedências e configurar o .env. **Não esquecendo de rodar as migrations**! 
+Aqui não há nada fora do comum. Basicamente, você deve clonar o repositório e fazer os procedimentos padrões do Laravel para rodar a aplicação, como instalar as dependências e configurar o .env.
 
 ```bash
 # Clone este repositório
@@ -28,12 +28,10 @@ $ cd DevsDoRN
 # Instale as dependências do Composer (essa instalação pode levar vários minutos)
 $ composer install
 
-# Instale as dependências do Node (essa instalação pode levar vários minutos)
-$ npm install
 
-$ Crie um banco de dados MySQL chamado 'devsdorn' e use a collation equivalente a 'utf8_general_ci'
+$ Crie um banco de dados MySQL chamado 'devsdorn' e cole a query de criação do banco.
 
-$ Configure o seu arquivo .env, lembrando de alterar, principalmente, o nome do banco e o acesso.
+$ Clone o arquivo .env.example e renomeie-o para '.env'. Em seguida, altere o nome do banco para 'devsdorn' e o configure o acesso do login e senha.
 
 # Crie uma chave para sua aplicação
 $ php artisan key:generate
