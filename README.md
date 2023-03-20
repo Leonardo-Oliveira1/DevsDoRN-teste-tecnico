@@ -31,7 +31,7 @@ $ composer install
 
 $ Crie um banco de dados MySQL chamado 'devsdorn' e cole a query de criação do banco.
 
-$ Clone o arquivo .env.example e renomeie-o para '.env'. Em seguida, altere o nome do banco para 'devsdorn' e o configure o acesso do login e senha.
+$ Clone o arquivo .env.example e renomeie-o para '.env'. Em seguida, altere o nome do banco para 'devsdorn' e configure o acesso do login e senha.
 
 # Crie uma chave para sua aplicação
 $ php artisan key:generate
